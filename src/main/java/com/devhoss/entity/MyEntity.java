@@ -1,4 +1,4 @@
-package com.devhoss;
+package com.devhoss.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
