@@ -32,8 +32,9 @@ public class ProductService implements IProductService{
     public Product update(Long id, Product updated) {
         Product product = iProductRepository.findById(id);
         if (product == null) return null;
-        product.name = updated.name;
-        product.price = updated.price;
+
+        product.setName(updated.getName());
+        product.setPrice(updated.getPrice());
         return product;
     }
 

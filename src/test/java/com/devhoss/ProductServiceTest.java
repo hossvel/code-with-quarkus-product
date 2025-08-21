@@ -18,27 +18,31 @@ public class ProductServiceTest {
 
     @Test
     public void testCreateAndFind() {
-        Product p = new Product();
-        p.name = "Laptop";
-        p.price = 1200.0;
+        Product p = new Product("Laptop",1200.0);
 
         Product saved = service.create(p);
-        assertNotNull(saved.id);
+        assertNotNull(saved.getId());
 
-        Product found = service.findById(saved.id);
-        assertEquals("Laptop", found.name);
+        Product found = service.findById(saved.getId());
+        assertEquals("Laptop", found.getName());
     }
 
     @Test
     public void testListAllAndDelete() {
-        Product p = new Product();
-        p.name = "Mouse";
-        p.price = 25.0;
+        Product p = new Product("Mouse",25.0);
+
         p = service.create(p);
 
         List<Product> products = service.listAll();
         assertFalse(products.isEmpty());
 
-        assertTrue(service.delete(p.id));
+        assertTrue(service.delete(p.getId()));
+    }
+
+
+    public static String generateProductJson(String name, double price) {
+        return "{"
+                + "\"name\":\"" + name + "\","
+                + "\"price\":" + price +"}";
     }
 }
