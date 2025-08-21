@@ -26,7 +26,7 @@ public class ProductServiceMockTest {
     public void testCreateProduct() {
         Product mockProduct = new Product("Laptop",1200.0);
 
-        Mockito.when(mockProductService.create(mockProduct)).thenReturn(null);
+        Mockito.when(mockProductService.create(Mockito.any(Product.class))).thenReturn(mockProduct);
 
         given()
                 .body("{\"name\":\"Laptop\",\"price\":1200}")
@@ -34,8 +34,9 @@ public class ProductServiceMockTest {
                 .when()
                 .post("/products")
                 .then()
-                .statusCode(201);
-
+                .statusCode(201)
+                .body("name", equalTo("Laptop"))
+                .body("price", equalTo(1200.0f));
 
 
 
